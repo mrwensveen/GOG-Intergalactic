@@ -29,10 +29,12 @@ public class ShellUtil
 			// TODO: Find GalaxyClient installation path (https://stackoverflow.com/questions/909910/how-to-find-the-execution-path-of-a-installed-software)
 			var galaxyDirectory = "C:\\Program Files (x86)\\GOG Galaxy";
 			var galaxyClient = Path.Combine(galaxyDirectory, "GalaxyClient.exe");
+			string gameName = (string)reader["label"];
+			gameName = gameName.Replace(":", "");
 
 			CreateShortcut(new Shortcut
 			{
-				Name = (string)reader["label"],
+				Name = gameName,
 				TargetPath = galaxyClient,
 				Arguments = $"/command=runGame /gameId={productId} /path=\"{(string)reader["installationPath"]}",
 				WorkingDirectory = galaxyDirectory,
